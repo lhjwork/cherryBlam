@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 const SignupForm = () => {
   return (
     <div>
-      <Button>dd</Button>
+      <Button>click me</Button>
     </div>
   );
 };
