@@ -14,9 +14,11 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { SignupValidation } from "@/lib/validation";
 import { z } from "zod";
+import Loader from "@/components/shared/Loader";
+import { Link } from "react-router-dom";
 
 const SignupForm = () => {
-  const isLoading = true;
+  const isLoading = false;
   // 1. Define your form.
   const form = useForm<z.infer<typeof SignupValidation>>({
     resolver: zodResolver(SignupValidation),
@@ -41,10 +43,12 @@ const SignupForm = () => {
         <img src="/assets/images/logo.svg" alt="logo" />
 
         <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12">
-          Create a new account
+          {/* Create a new account */}
+          계정 만들기 !
         </h2>
         <p className="text-light-3 small-medium md:base-regular mt-2">
-          To use CherryBlam enter your account details
+          {/* To use CherryBlam, please enter your account details */}
+          CherryBlam을 사용하기 위해서 상세 정보를 입력해 주세요.
         </p>
 
         <form
@@ -56,7 +60,7 @@ const SignupForm = () => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name</FormLabel>
+                <FormLabel>아이디</FormLabel>
                 <FormControl>
                   <Input type="text" className="shad-input" {...field} />
                 </FormControl>
@@ -69,7 +73,7 @@ const SignupForm = () => {
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>사용자 이름</FormLabel>
                 <FormControl>
                   <Input type="text" className="shad-input" {...field} />
                 </FormControl>
@@ -82,7 +86,7 @@ const SignupForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>이메일</FormLabel>
                 <FormControl>
                   <Input type="email" className="shad-input" {...field} />
                 </FormControl>
@@ -95,7 +99,7 @@ const SignupForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>비밀번호</FormLabel>
                 <FormControl>
                   <Input type="password" className="shad-input" {...field} />
                 </FormControl>
@@ -105,13 +109,25 @@ const SignupForm = () => {
           />
           <Button type="submit" className="shad-button_primary">
             {isLoading ? (
-              <div className="flex-center gap-2">Loading...</div>
+              <div className="flex-center gap-2">
+                <Loader />
+                Loading...
+              </div>
             ) : (
               "Sign up"
             )}
           </Button>
         </form>
       </div>
+      <p className="text-small-regular text-light-2 text-center mt-2">
+        회원 가입 되어있으신가요?
+        <Link
+          to="/sign-in"
+          className="text-primary-500 text-small-semibold ml-1"
+        >
+          Log in
+        </Link>
+      </p>
     </Form>
   );
 };
