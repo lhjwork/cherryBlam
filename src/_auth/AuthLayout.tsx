@@ -17,7 +17,8 @@ const AuthLayout = () => {
           <img
             src="/assets/images/side-img.svg"
             alt="logo"
-            //min-width 이하에서 적용 됨
+            //min-width 최소  min-width 이상에서 작동
+            //모바일 디바이스에서 주로 hidden
             className="hidden xl:block h-screen w-1/2 object-cover bg-no-repeat"
           />
         </>
