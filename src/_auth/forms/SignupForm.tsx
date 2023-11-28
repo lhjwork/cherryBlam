@@ -17,7 +17,7 @@ import { z } from "zod";
 import Loader from "@/components/shared/Loader";
 import { Link } from "react-router-dom";
 import { createUserAccount } from "@/lib/appwrite/api";
-
+// "10427 Storage&Database Design APPWRITE_STORAGE_ID and APPWRITE_DATABASE_ID"
 const SignupForm = () => {
   const isLoading = false;
   // 1. Define your form.
