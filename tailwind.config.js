@@ -15,11 +15,14 @@ export default {
       },
     },
     extend: {
+      // textColor: { "t-color-500": "#ff758c" },
       colors: {
-        "primary-500": "#877EFF",
+        // "primary-500": "#877EFF",
+        "primary-500": "#ff758c",
         "primary-600": "#5D5FEF",
         "secondary-500": "#FFB620",
         "off-white": "#D0DFFF",
+        "cherry-primary-500": "#ff758c",
         red: "#FF5A5A",
         "dark-1": "#000000",
         "dark-2": "#09090A",
@@ -29,6 +32,7 @@ export default {
         "light-2": "#EFEFEF",
         "light-3": "#7878A3",
         "light-4": "#5C5C7B",
+        "light-5": "#ff758c",
       },
       screens: {
         xs: "480px",

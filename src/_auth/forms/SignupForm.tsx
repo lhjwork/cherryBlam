@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { IoMdFlower } from "react-icons/io";
 import {
   Form,
   FormControl,
@@ -38,9 +38,13 @@ const SignupForm = () => {
   return (
     <Form {...form}>
       <div className="sm:w-420 flex-center flex-col">
-        <img src="/assets/images/logo.svg" alt="logo" />
+        {/* <img src="/assets/images/logo.svg" alt="logo" /> */}
+        <div className="flex flex-center">
+          <IoMdFlower className="w-14 h-14 text-light-5" />
+          <p className="text-3xl">CherryBlam</p>
+        </div>
 
-        <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12">
+        <h2 className="h3-bold md:h2-bold pt-5">
           {/* Create a new account */}
           계정 만들기 !
         </h2>
