@@ -1,9 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { IoMdFlower } from "react-icons/io";
+import { Link } from "react-router-dom";
+import { useToast } from "@/components/ui/use-toast";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -15,10 +15,13 @@ import { useForm } from "react-hook-form";
 import { SignupValidation } from "@/lib/validation";
 import { z } from "zod";
 import Loader from "@/components/shared/Loader";
-import { Link } from "react-router-dom";
+
 import { createUserAccount } from "@/lib/appwrite/api";
+
+import { IoMdFlower } from "react-icons/io";
 // "10427 Storage&Database Design APPWRITE_STORAGE_ID and APPWRITE_DATABASE_ID"
 const SignupForm = () => {
+  const { toast } = useToast();
   const isLoading = false;
   // 1. Define your form.
   const form = useForm<z.infer<typeof SignupValidation>>({
@@ -35,8 +38,12 @@ const SignupForm = () => {
     const newUser = await createUserAccount(values);
 
     if (!newUser) {
-      return;
+      return toast({
+        title: "회원가입에 실패하셨습니다. 회원정보를 다시 한번 확인 바랍니다.",
+      });
     }
+
+    // const session = await signInAccount()
   }
   return (
     <Form {...form}>
