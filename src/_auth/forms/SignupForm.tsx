@@ -39,10 +39,10 @@ const SignupForm = () => {
 
     if (!newUser) {
       return toast({
-        title: "회원가입에 실패하셨습니다. 회원정보를 다시 한번 확인 바랍니다.",
+        title: "회원가입에 실패하셨습니다. 중복되는 정보가 존재 합니다.",
       });
     }
-
+    // react-query 다루는 곳 13109
     // const session = await signInAccount()
   }
   return (
