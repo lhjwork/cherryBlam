@@ -16,13 +16,17 @@ import { SignupValidation } from "@/lib/validation";
 import { z } from "zod";
 import Loader from "@/components/shared/Loader";
 
-import { createUserAccount } from "@/lib/appwrite/api";
-
 import { IoMdFlower } from "react-icons/io";
+import { useCreateUserAccountMutation } from "@/lib/react-query/queriesAndMutations";
 // "10427 Storage&Database Design APPWRITE_STORAGE_ID and APPWRITE_DATABASE_ID"
 const SignupForm = () => {
   const { toast } = useToast();
   const isLoading = false;
+
+  // hook form
+  const { mutateAsync: createUserAccount, isLoading: isCreatingUser } =
+    useCreateUserAccountMutation();
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof SignupValidation>>({
     resolver: zodResolver(SignupValidation),
@@ -120,7 +124,7 @@ const SignupForm = () => {
             )}
           />
           <Button type="submit" className="shad-button_primary">
-            {isLoading ? (
+            {isCreatingUser ? (
               <div className="flex-center gap-2">
                 <Loader />
                 Loading...
