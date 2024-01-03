@@ -17,7 +17,10 @@ import { z } from "zod";
 import Loader from "@/components/shared/Loader";
 
 import { IoMdFlower } from "react-icons/io";
-import { useCreateUserAccountMutation } from "@/lib/react-query/queriesAndMutations";
+import {
+  useCreateUserAccountMutation,
+  useSignInAccount,
+} from "@/lib/react-query/queriesAndMutations";
 // "10427 Storage&Database Design APPWRITE_STORAGE_ID and APPWRITE_DATABASE_ID"
 const SignupForm = () => {
   const { toast } = useToast();
@@ -26,6 +29,10 @@ const SignupForm = () => {
   // hook form
   const { mutateAsync: createUserAccount, isLoading: isCreatingUser } =
     useCreateUserAccountMutation();
+
+  // hook form
+  const { mutateAsync: signInAccount, isLoading: isSigningIn } =
+    useSignInAccount();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof SignupValidation>>({
@@ -47,7 +54,14 @@ const SignupForm = () => {
       });
     }
     // react-query 다루는 곳 13109
-    // const session = await signInAccount()
+    const session = await signInAccount({
+      email: values.email,
+      password: values.password,
+    });
+
+    if (!session) {
+      return toast({ title: "Sign in failed. Please try again" });
+    }
   }
   return (
     <Form {...form}>
