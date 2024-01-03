@@ -12,3 +12,10 @@ export const SignupValidation = z.object({
     .email({ message: "@를 포함한 정확한 이메일 주소를 입력해주세요. " }),
   password: z.string().min(8, { message: "최소 8글자 입니다. " }),
 });
+
+export const SigninValidation = z.object({
+  email: z
+    .string()
+    .email({ message: "@를 포함한 정확한 이메일 주소를 입력해주세요. " }),
+  password: z.string().min(8, { message: "최소 8글자 입니다. " }),
+});
