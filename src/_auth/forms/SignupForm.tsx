@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
 import {
   Form,
@@ -18,20 +18,22 @@ import Loader from "@/components/shared/Loader";
 
 import { IoMdFlower } from "react-icons/io";
 import {
-  useCreateUserAccountMutation,
+  useCreateUserAccount,
   useSignInAccount,
 } from "@/lib/react-query/queriesAndMutations";
+import { useUserContext } from "@/context/AuthContext";
 // "10427 Storage&Database Design APPWRITE_STORAGE_ID and APPWRITE_DATABASE_ID"
 const SignupForm = () => {
   const { toast } = useToast();
-  const isLoading = false;
+  const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
+  const navigate = useNavigate();
 
   // hook form
-  const { mutateAsync: createUserAccount, isLoading: isCreatingUser } =
-    useCreateUserAccountMutation();
+  const { mutateAsync: createUserAccount, isPending: isCreatingAccount } =
+    useCreateUserAccount();
 
   // hook form
-  const { mutateAsync: signInAccount, isLoading: isSigningIn } =
+  const { mutateAsync: signInAccount, isPending: isSigningIn } =
     useSignInAccount();
 
   // 1. Define your form.
@@ -60,6 +62,15 @@ const SignupForm = () => {
     });
 
     if (!session) {
+      return toast({ title: "Sign in failed. Please try again" });
+    }
+
+    const isLoading = await checkAuthUser();
+
+    if (isLoading) {
+      form.reset();
+      navigate("/");
+    } else {
       return toast({ title: "Sign in failed. Please try again" });
     }
   }
@@ -138,7 +149,7 @@ const SignupForm = () => {
             )}
           />
           <Button type="submit" className="shad-button_primary">
-            {isCreatingUser ? (
+            {isCreatingAccount ? (
               <div className="flex-center gap-2">
                 <Loader />
                 Loading...
