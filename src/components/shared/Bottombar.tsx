@@ -4,6 +4,7 @@ import { bottombarLinks } from "@/constants";
 import { Link, useLocation } from "react-router-dom";
 
 const Bottombar = () => {
+  //현재 주소의 경로 (쿼리스트링 제외)
   const { pathname } = useLocation();
   return (
     <section className="bottom-bar">
