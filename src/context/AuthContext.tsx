@@ -20,6 +20,7 @@ const INITAL_STATE = {
   checkAuthUser: async () => false as boolean,
 };
 
+// useContext에 담아서 user 정보를 전달
 const AuthContext = createContext<IContextType>(INITAL_STATE);
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -57,6 +58,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  // 회원가입에서 session에 정보를 담는 이유가 session이 없으면 로그인 페이지로 이동 시켜서
+  // 자동으로 페이지 이동하게 유도함
   useEffect(() => {
     const cookieFallback = localStorage.getItem("cookieFallback");
     if (
@@ -67,6 +70,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       navigate("/sign-in");
     }
 
+    // 계정정보가 있는 user 확인
     checkAuthUser();
   }, []);
 

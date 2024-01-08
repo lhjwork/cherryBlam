@@ -1,3 +1,4 @@
+//I : interface의 약자
 export type IContextType = {
   user: IUser;
   isLoading: boolean;

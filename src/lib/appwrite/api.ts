@@ -70,6 +70,7 @@ export async function getCurrentUser() {
     const currentUser = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
+      //appwrite에서 list형식으로 전달되어서 이렇게 담음
       [Query.equal("accountId", currentAccount.$id)]
     );
 
