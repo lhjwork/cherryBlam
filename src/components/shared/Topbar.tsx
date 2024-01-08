@@ -2,14 +2,15 @@ import { useUserContext } from "@/context/AuthContext";
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
-
+import { useSignOutAccount } from "@/lib/react-query/queriesAndMutations";
 const Topbar = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { user } = useUserContext();
-  // const {mu}
+  const { mutate: signOut, isSuccess } = useSignOutAccount();
+
   useEffect(() => {
-    // if (isSuccess) navigate(0);
-  });
+    if (isSuccess) navigate(0);
+  }, [isSuccess]);
   return (
     <section className="topbar">
       <div className="flex-between py-4 px-5">
@@ -27,7 +28,7 @@ const Topbar = () => {
             <Button
               variant={"ghost"}
               className="shad-button_ghost"
-              // onClick={() => signOut()}
+              onClick={() => signOut()}
             >
               <img src="/assets/icons/logout.svg" alt="logout" />
             </Button>

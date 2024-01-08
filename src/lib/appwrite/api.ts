@@ -81,3 +81,13 @@ export async function getCurrentUser() {
     console.log("tetat: " + error);
   }
 }
+
+// ============================== SIGN OUT
+export async function signOutAccount() {
+  try {
+    const session = await account.deleteSession("current");
+    return session;
+  } catch (error) {
+    console.log(error);
+  }
+}

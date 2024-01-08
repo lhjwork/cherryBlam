@@ -1,5 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
-import { createUserAccount, signInAccount } from "../appwrite/api";
+import {
+  createUserAccount,
+  signInAccount,
+  signOutAccount,
+} from "../appwrite/api";
 import { INewUser } from "@/types";
 
 // mutation 일반적 형식 (공식 문서)
@@ -21,6 +25,12 @@ export const useSignInAccount = () => {
   return useMutation({
     mutationFn: (user: { email: string; password: string }) =>
       signInAccount(user),
+  });
+};
+
+export const useSignOutAccount = () => {
+  return useMutation({
+    mutationFn: signOutAccount,
   });
 };
 
