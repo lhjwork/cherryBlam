@@ -23,7 +23,7 @@ const LeftSidebar = () => {
   };
 
   return (
-    <nav className="leftsidebar">
+    <nav className="leftsidebar ">
       <div className="flex flex-col gap-11">
         <Link to="/" className="flex gap-3 items-center">
           <img
@@ -59,7 +59,7 @@ const LeftSidebar = () => {
             return (
               <li
                 key={link.label}
-                className={`leftsidebar-link group ${
+                className={`leftsidebar-link group flex gap-6 p-2 w-10   ${
                   isActive && "bg-primary-500"
                 }`}
               >
