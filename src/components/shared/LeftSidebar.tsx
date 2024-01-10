@@ -1,10 +1,11 @@
 import React from "react";
 import { Button } from "../ui/button";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { INITIAL_USER, useUserContext } from "@/context/AuthContext";
 import Loader from "./Loader";
 import { sidebarLinks } from "@/constants";
 import { useSignOutAccount } from "@/lib/react-query/queriesAndMutations";
+import { INavLink } from "@/types";
 
 const LeftSidebar = () => {
   const navigate = useNavigate();
@@ -53,24 +54,26 @@ const LeftSidebar = () => {
         )}
 
         <ul className="flex flex-col gap-6">
-          {sidebarLinks.map((link) => {
+          {sidebarLinks.map((link: INavLink) => {
             const isActive = pathname === link.route;
 
             return (
               <li
                 key={link.label}
-                className={`leftsidebar-link group flex gap-6 p-2 w-10   ${
+                className={`leftsidebar-link group flex gap-6 p-2   ${
                   isActive && "bg-primary-500"
                 }`}
               >
-                <img
-                  src={link.imgURL}
-                  alt={link.label}
-                  className={`group-hover:invert-white ${
-                    isActive && "invert-white"
-                  }`}
-                />
-                {link.label}
+                <NavLink to={link.route} className="flex gap-4 items-center">
+                  <img
+                    src={link.imgURL}
+                    alt={link.label}
+                    className={`group-hover:invert-white ${
+                      isActive && "invert-white"
+                    }`}
+                  />
+                  {link.label}
+                </NavLink>
               </li>
             );
           })}

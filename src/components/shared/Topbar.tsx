@@ -25,7 +25,7 @@ const Topbar = () => {
         </Link>
 
         <div className="flex gap-4">
-          <Link to={`/profile/userId`} className="flex-center gap-3">
+          <Link to={`/profile/${user.id}`} className="flex-center gap-3">
             <Button
               variant={"ghost"}
               className="shad-button_ghost"
