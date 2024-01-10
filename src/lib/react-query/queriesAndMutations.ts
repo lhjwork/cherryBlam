@@ -1,10 +1,13 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   createUserAccount,
+  getRecentPosts,
+  getUsers,
   signInAccount,
   signOutAccount,
 } from "../appwrite/api";
 import { INewUser } from "@/types";
+import { QUERY_KEYS } from "./queryKeys";
 
 // mutation 일반적 형식 (공식 문서)
 // const mutation = useMutation({
@@ -34,4 +37,18 @@ export const useSignOutAccount = () => {
   });
 };
 
-// 13923
+export const useGetUsers = (limit?: number) => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_USERS],
+    queryFn: () => getUsers(limit),
+  });
+};
+
+// POST QUERIES
+// ============================================================
+export const useGetRecentPosts = () => {
+  return useQuery({
+    queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
+    queryFn: getRecentPosts,
+  });
+};

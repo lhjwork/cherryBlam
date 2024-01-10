@@ -140,6 +140,7 @@
   }
 
   .home-posts {
+   /* max-width : 640px -> 최대값은 640까지 줄이는건 상관 없지만 더 늘어나지 않는다. */
     @apply max-w-screen-sm flex flex-col items-center w-full gap-6 md:gap-9;
   }
 

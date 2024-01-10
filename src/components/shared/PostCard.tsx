@@ -1,3 +1,4 @@
+import { useUserContext } from "@/context/AuthContext";
 import { multiFormatDateString } from "@/lib/utils";
 import { Models } from "appwrite";
 import React from "react";
@@ -8,10 +9,14 @@ type PostCardProps = {
 };
 
 const PostCard = ({ post }: PostCardProps) => {
+  const { user } = useUserContext();
+
+  if (!post.creator) return;
+
   return (
     <div className="post-card">
       <div className="flex-between">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-d">
           <Link to={`/profile/${post.creator.$id}`}>
             <img
               src={
@@ -38,6 +43,18 @@ const PostCard = ({ post }: PostCardProps) => {
             </div>
           </div>
         </div>
+
+        <Link
+          to={`/update-post/${post.$id}`}
+          className={`${user.id !== post.creator.$id && "hidden"}`}
+        >
+          <img
+            src={"/assets/icons/edit.svg"}
+            alt="edit"
+            width={20}
+            height={20}
+          />
+        </Link>
       </div>
     </div>
   );
